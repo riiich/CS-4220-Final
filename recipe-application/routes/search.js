@@ -79,7 +79,7 @@ router.get('/:recipeID/details', async (req, res) => {
         };
 
         res.json(results);
-
+        console.log('hi richard');
     } catch (error) {
         console.log(error);
     }
