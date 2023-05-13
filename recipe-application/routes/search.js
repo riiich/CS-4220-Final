@@ -44,7 +44,16 @@ router.get('/', async (req, res) => {
 
     res.json(results);
 
-    database.save('Results', {recipe, searchCount : promptedRecipes.length, lastSearched : metadata.lastSearched});
+    if(val === null){
+        database.save('Results', 
+            {
+                searchTerm : recipe, 
+                searchCount : promptedRecipes.length,
+                lastSearched : metadata.lastSearched
+            });
+    }else{
+        database.update('Results', recipe, {lastSearched : metadata.lastSearched});
+    }
 });
 
 router.get('/:recipeID/details', async (req, res) => {
@@ -60,7 +69,8 @@ router.get('/:recipeID/details', async (req, res) => {
             ingrList.push(i);
         });
 
-        const results = {mealType : details.recipe.mealType,
+        const results = {
+            mealType : details.recipe.mealType,
             dishType: details.recipe.dishType,
             cusineType: details.recipe.cuisineType,
             totalTime : details.recipe.totalTime,
