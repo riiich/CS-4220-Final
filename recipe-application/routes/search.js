@@ -25,10 +25,6 @@ router.use((req, res, next) => {
         };
 
     } else if (req.path.includes('details')){
-        // const idVal = req.path.split('/');
-        // query.metadata = {
-        //     selections : []
-        // };
 
     }
 
