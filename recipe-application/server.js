@@ -11,8 +11,8 @@ const search = require('./routes/search.js');
 app.use('/search', search);
 
 // require in the exported router from results.js
-// const history = require('./routes/history.js');
-// app.use('/history', history);
+const history = require('./routes/history.js');
+app.use('/history', history);
 
 // start the server
 app.listen(port, async () => {
