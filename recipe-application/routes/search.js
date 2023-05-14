@@ -73,11 +73,15 @@ router.get('/:recipeID/details', async (req, res) => {
             ingrList.push(i);
         });
 
-        const results = {mealType : detailsRecipe.recipe.mealType[0],
+        console.log(detailsRecipe);
+
+        const results = {
+            dishName: detailsRecipe.recipe.label,
+            mealType : detailsRecipe.recipe.mealType[0],
             dishType: detailsRecipe.recipe.dishType[0],
-            cusineType: detailsRecipe.recipe.cuisineType[0],
+            cuisineType: detailsRecipe.recipe.cuisineType[0],
             totalTime : detailsRecipe.recipe.totalTime,
-            ingredient : ingrList,
+            ingredients : ingrList,
             calories : detailsRecipe.recipe.calories
         };
 
