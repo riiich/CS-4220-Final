@@ -8,18 +8,30 @@ router.get('/', async (req, res) => {
     try {
         const { query } = req;
         const { recipe } = query;
-        
-        if (recipe === undefined){
+        console.log(recipe);
+        if(recipe === undefined){
             const results = await database.find('Results');
             res.json(results);
         } else {
             const results = await database.find('Results', recipe);
             res.json(results);
         }
-
     } catch (error) {
         res.status(500).json(error.toString());
     }
 });
+
+// return json of all the searches associated with query parameter
+// router.get('/:searchTerm', async (req, res) => {
+//     try {
+//         const { params } = req;
+//         const { searchTerm } = params;
+
+//         const results = await database.find('Results', searchTerm);
+//         res.json(results);
+//     } catch (error) {
+//         res.status(500).json(error.toString());
+//     }
+// });
 
 module.exports = router;
