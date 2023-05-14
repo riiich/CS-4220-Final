@@ -73,8 +73,6 @@ router.get('/:recipeID/details', async (req, res) => {
             ingrList.push(i);
         });
 
-        console.log(detailsRecipe);
-
         const results = {
             dishName: detailsRecipe.recipe.label,
             mealType : detailsRecipe.recipe.mealType[0],
@@ -99,10 +97,8 @@ router.get('/:recipeID/details', async (req, res) => {
                     {...original, selections : [{id : recipeID, results}]});
             }
         } else {
-            console.log('recipe is not in database yet');
+            console.log('Recipe is not in the database yet!');
         }
-
-
     } catch (error) {
         console.log(error);
     }
