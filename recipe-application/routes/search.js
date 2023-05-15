@@ -25,10 +25,6 @@ router.use((req, res, next) => {
         };
 
     } else if (req.path.includes('details')){
-        // const idVal = req.path.split('/');
-        // query.metadata = {
-        //     selections : []
-        // };
 
     }
 
@@ -51,8 +47,12 @@ router.get('/', async (req, res) => {
     const val = await database.find('Results', recipe);
 
     if(val === null){   
-        database.save('Results', {searchTerm : recipe, searchCount : promptedRecipes.length, 
-            lastSearched : metadata.lastSearched});
+        database.save('Results', 
+        {
+            searchTerm : recipe, 
+            searchCount : promptedRecipes.length, 
+            lastSearched : metadata.lastSearched
+        });
     } else {
         database.update('Results', recipe, {lastSearched : metadata.lastSearched});
     }
@@ -72,8 +72,6 @@ router.get('/:recipeID/details', async (req, res) => {
         detailsRecipe.recipe.ingredientLines.forEach(i => {
             ingrList.push(i);
         });
-
-        console.log(detailsRecipe);
 
         const results = {
             dishName: detailsRecipe.recipe.label,
