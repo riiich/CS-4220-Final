@@ -17,15 +17,12 @@ const _formatRecipe = (recipes) => {
 router.use((req, res, next) => {
     console.log('Middleware is running');
 
-    const { headers, query } = req;
+    const { query } = req;
 
     if(req.path === '/'){
         query.metadata = {
             lastSearched : new Date()
         };
-
-    } else if (req.path.includes('details')){
-
     }
 
     next();
@@ -48,11 +45,11 @@ router.get('/', async (req, res) => {
 
     if(val === null){   
         database.save('Results', 
-        {
-            searchTerm : recipe, 
-            searchCount : promptedRecipes.length, 
-            lastSearched : metadata.lastSearched
-        });
+            {
+                searchTerm : recipe, 
+                searchCount : promptedRecipes.length, 
+                lastSearched : metadata.lastSearched
+            });
     } else {
         database.update('Results', recipe, {lastSearched : metadata.lastSearched});
     }
